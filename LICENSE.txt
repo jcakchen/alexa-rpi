@@ -1,16 +1,9 @@
-SENSORY, INC. (“Licensor”) LICENSE
+Sensory Trulyhandsfree™ Library License
+
+You may not use the Sensory TrulyHandsfree™ library or code files except in compliance with this license. The Sensory library and code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 THE FOLLOWING TERMS AND CONDITIONS (the end user license agreement, or “EULA”) SET FORTH THE RIGHTS BEING LICENSED TO YOU (THE “Licensee”) FOR THE USE OF SENSORY’S TRULYHANDSFREE(™) (herein referred to as "Software Product" or "Software"). THESE RIGHTS ARE THE ONLY RIGHTS YOU HAVE TO THE SOFTWARE, SO IF YOU DO NOT AGREE TO THE TERMS AND CONDITIONS OF THIS EULA, DO NOT USE THE SOFTWARE.
 
-Assent
-
-By clicking “I Agree” below, or by opening the file package containing the Software, you agree (i) that this EULA is a legally binding and valid contract, (ii) agree to abide by all of the terms and conditions of this EULA, and (iii) agree to take all necessary steps to ensure that the terms and conditions of this EULA are not violated by any person or entity under your control or in your service or cooperation.
-
-This EULA covers the following areas:
-License and Copyright
-Liability and Indemnification
-Support
-Applicability
 
 License and Copyright
 
@@ -40,7 +33,7 @@ Licensee agrees that Licensee, Licensee's employees, and Licensee's contractors 
 
 Commercial Use
 
-This EULA grants you the right to use the Software for personal use only. Commercial use of the Software or of the work products resulting from its use is not permitted under this EULA.
+This EULA grants you the right to use the Software for personal, non-commercial use only. Commercial use of the Software or of the work products resulting from its use is not permitted under this EULA.
 
 Ownership of Software
 
@@ -68,7 +61,7 @@ Updates and Upgrades: all updates and upgrades of the Software from a previously
 
 Term
 
-This EULA is effective until terminated. You may terminate this EULA at any time by uninstalling the Software. Upon any termination, you agree to uninstall the Software and return or destroy all copies of the Software, any accompanying documentation, as well as any and all other associated materials.
+This EULA is effective until terminated. You may terminate this EULA at any time by uninstalling the Software or permanently deleting the files. Upon any termination, you agree to uninstall the Software and return or destroy all copies of the Software, any accompanying documentation, as well as any and all other associated materials.
 
 Severability
 
@@ -88,4 +81,3 @@ Santa Clara, California 95054
 US
 
 Copyright © Sensory, Inc. 2016. All Rights Reserved. (http://sensory.com/)
-
