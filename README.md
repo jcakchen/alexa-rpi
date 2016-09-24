@@ -30,87 +30,7 @@ as enrolled speaker-specific triggers and speaker verification.
 
 This project is a plug-in for the **(elided)**
 WakeWordEngine. Please follow the build and configuration instructions
-for that project before proceeding.
-
-**NOTE:**
-These instructions are for a Rasberry Pi 2 or 3, running [Raspbian Jessie][rj].
-You'll be building the project on the Raspberry Pi itself.
-
-### Configure the Environment
-
-#### Install tools and sources
-
-Install the required development tools and libraries:
-```
-sudo apt-get update
-sudo apt-get install alsa-utils cmake git g++ make libasound2
-```
-
-Clone this repository into the *sensory/* subdirectory of the WakeWordAgent
-project:
-```
-cd WakeWordAgent
-git clone https://github.com/sensory/alexa-rpi.git sensory
-```
-
-#### Validate audio recording path
-The project uses [ALSA][] for audio recording. It will open a capture session
-from the default audio device, and record 16-bit signed integers at 16 kHz.
-You'll need a USB microphone. We've found that the "USB 2.0 Mini Microphone"
-recommended on the **(elided)**, but does not provide optimal
-performance. Please consider upgrading to a higher quality microphone.
-
-There is an example [/etc/asound.conf][alsacfg] included in the
-*config/* subdirectory in this repository.  This file configures ALSA
-to use the USB microphone as the default input source, and the analog
-audio jack as the default output.  We recommend that you use this
-configuration as a starting point for your audio routing.
-
-Verify that your audio configuration is suitable by running this command to
-make a ten second long audio recording:
-```
-arecord -d 10 -f S16_LE -r 16000 test.wav
-```
-
-Listen to the test recording and verify that it is clear:
-```
-aplay test.wav
-```
-
-If the recording volume is low, experiment with adjusting the recording levels
-using `alsamixer`. Run `sudo alsactl store` to make these settings permanent.
-
-
-### Build the Project
-
-In the WakeWordAgent directory, run `./sensory/build.sh`. This will verify
-that the project sources are in the expected locations, apply the
-TrulyHandsfree SDK license key to the binaries, create a *build/*
-directory and build the project there.
-
-As an alternative, follow these manual steps, starting in the WakeWordAgent
-source directory:
-```
-./sensory/bin/license.sh
-mkdir build
-cd build
-cmake -DWITH_SENSORY=ON ..
-make -j4
-# select a keyword spotter
-ln -s ../sensory/models/spot-alexa-rpi-31000.snsr spot-alexa-rpi.snsr
-```
-
-### Running the Service
-
-In the *WakeWordAgent/build/* directory, run `./WakeWordAgent`.
-
-Say "Alexa" and look for the console output line
-`LOG_INFO   : SensoryWakeWordEngine: Spotted wakeword.`
-
-The SensoryWakeWordEngine loads a keyword spotter model
-from *spot-alexa-rpi.snsr* in the current directory. The build script sets
-this as a symbolic link to one of the models in *WakeWordAgent/sensory/models/*
-
+for that project.
 
 ## Performance
 
@@ -155,7 +75,32 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
     * Open a [GitHub issue][issue] and include detail on how to
       trigger the unexpected behavior.
 
+1. The library license key has expired. How do I extend it?
+    * Run `./bin/license.sh`. Accept the presented EULA to pull a new license
+      key from the GitHub repository and apply it to the binaries.
+    * Copy `./lib/libsnsr.a` into your project's `ext/lib/` directory, replacing
+      the expired library.
+    * Copy `./models/*.snsr` into your project's `ext/resources/` directory,
+      replacing the expired models.
+    * Rebuild your `wakeWordAgent` executable.
 
+1. What can I do to address audio recording problems?
+    * The project uses [ALSA][] for audio recording. It will open a
+      capture session from the default audio device, and record 16-bit signed
+      integers at 16 kHz.
+    * There is an example [/etc/asound.conf][alsacfg] included in the
+      *config/* subdirectory in this repository.  This file configures ALSA
+      to use the USB microphone as the default input source, and the analog
+      audio jack as the default output.  We recommend that you use this
+      configuration as a starting point for your audio routing.
+    * Verify that your audio configuration is suitable by running this
+      command to make a ten second long audio recording:
+      `arecord -d 10 -f S16_LE -r 16000 test.wav`
+    * Listen to the test recording and verify that it is clear:
+      `aplay test.wav`
+    * If the recording volume is low, experiment with adjusting the recording
+      levels using `alsamixer`. Run `sudo alsactl store` to make these
+      settings permanent.
 
 ---------
 *Copyright &copy; 2016 Sensory, Inc. http://sensory.com/*
