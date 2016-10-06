@@ -1,10 +1,10 @@
-# Sensory WakeWord Engine
+# Sensory TrulyHandsfree WakeWord Engine
 
 
 ## About the Project
 
-This [project][] provides plug-in keyword spotting for the **(elided)**
-WakeWordEngine project, using
+This [project][] provides plug-in keyword spotting for the
+[Alexa AVS sample app][alexa] Raspberry Pi project, using
 [Sensory's][sensory] [TrulyHandsfree][thf] technology. It includes
 speaker-independent recognizers for the phrase "Alexa".
 
@@ -28,9 +28,8 @@ as enrolled speaker-specific triggers and speaker verification.
 
 ## Getting Started
 
-This project is a plug-in for the **(elided)**
-WakeWordEngine. Please follow the build and configuration instructions
-for that project.
+This project is a plug-in for the [Alexa AVS sample app][alexa] project.
+Please follow the build and configuration instructions for that project.
 
 ## Performance
 
@@ -105,6 +104,7 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
 ---------
 *Copyright &copy; 2016 Sensory, Inc. http://sensory.com/*
 
+[alexa]:   https://github.com/alexa/alexa-avs-sample-app
 
 [sensory]: http://sensory.com/
 [sales]:   http://www.sensory.com/support/contact/us-sales/
