@@ -101,6 +101,13 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
       levels using `alsamixer`. Run `sudo alsactl store` to make these
       settings permanent.
 
+1. Which ARM architectures are supported?
+    * The `libsnsr.a` TrulyHandsfree library is compiled for ARMv7, and will
+      use NEON instructions on the Rasperry Pi 2 and 3.
+    * The Raspberry Pi 1 and Raspberry Pi Zero use an ARM1176JZF-S CPU,
+      which supports ARMv6 instructions only. These are not supported in
+      this plug-in.
+
 ---------
 *Copyright &copy; 2016 Sensory, Inc. http://sensory.com/*
 
