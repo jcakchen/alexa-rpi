@@ -108,8 +108,26 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
       which supports ARMv6 instructions only. These are not supported in
       this plug-in.
 
+
+## Change Log
+
+### 5.0.0-avs.2 - 2017-01-26
+#### Added
+- Change log section in README.md.
+
+#### Fixed
+- Reporting of ALSA errors.
+- Handling of short ALSA reads. This addresses spurious
+  end-of-stream errors during audio capture.
+- `Push iteration limit exceeded` errors, which occasionally stopped the
+  the WakeWord Engine after it had been running for a couple of days.
+
+### 5.0.0-avs.1 - 2016-09-12
+#### Added
+- Initial release.
+
 ---------
-*Copyright &copy; 2016 Sensory, Inc. http://sensory.com/*
+*Copyright &copy; 2016-2017 Sensory, Inc. http://sensory.com/*
 
 [alexa]:   https://github.com/alexa/alexa-avs-sample-app
 
