@@ -81,6 +81,8 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
       the expired library.
     * Copy `./models/*.snsr` into your project's `ext/resources/` directory,
       replacing the expired models.
+    * Copy the model you've selected into `ext/resources/spot-alexa-rpi.snsr`,
+      e.g.: `cp ./models/spot-alexa-rpi-31000.snsr ../../ext/resources/spot-alexa-rpi.snsr`
     * Rebuild your `wakeWordAgent` executable.
 
 1. What can I do to address audio recording problems?
