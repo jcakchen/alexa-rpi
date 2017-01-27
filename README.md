@@ -111,7 +111,7 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
       this plug-in.
 
 ---------
-*Copyright &copy; 2016 Sensory, Inc. http://sensory.com/*
+*Copyright &copy; 2016-2017 Sensory, Inc. http://sensory.com/*
 
 [alexa]:   https://github.com/alexa/alexa-avs-sample-app
 
