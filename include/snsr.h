@@ -91,13 +91,13 @@ extern "C" {
 #define SNSR_USER_LIST "user-iterator"
 #include <stddef.h>
 #define SNSR_NAME          "TrulyHandsfree"
-#define SNSR_VERSION       "5.0.0-avs.2"
+#define SNSR_VERSION       "5.0.0-avs.3"
 #define SNSR_VERSION_MAJOR  5
 #define SNSR_VERSION_MINOR  0
 #define SNSR_VERSION_PATCH  0
-#define SNSR_VERSION_PRE   "avs.2"
+#define SNSR_VERSION_PRE   "avs.3"
 #define SNSR_VERSION_BUILD ""
-#define SNSR_VERSION_ID     13
+#define SNSR_VERSION_ID     14
 #define SNSR_SETTING_SZ     64
 typedef struct SnsrSession_ *SnsrSession;
 typedef enum {
