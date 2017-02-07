@@ -113,37 +113,35 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
 
 ## Change Log
 
-### 5.0.0-avs.4 - 2017-02-06
-### Changed
-- snsrNew() validates snsr.h version.
-- Larger ALSA capture buffer.
-- snsrStreamFromAudioDevice() tries to recover from snd_pcm_readi() errors.
+#### 5.0.0-avs.4 - 2017-02-06
+* Changed
+    - snsrNew() validates snsr.h version.
+    - Larger ALSA capture buffer.
+    - snsrStreamFromAudioDevice() tries to recover from snd_pcm_readi() errors.
+* Fixed
+    - snsrRun() and snsrForEach() returns SNSR_RC_ERROR when the SnsrCallback
+      function returned SNSR_RC_INTERRUPTED.
 
-### Fixed
-- snsrRun() and snsrForEach() returns SNSR_RC_ERROR when the SnsrCallback
-  function returned SNSR_RC_INTERRUPTED.
+#### 5.0.0-avs.3 - 2017-02-01
+* Fixed
+    - Handling of zero ALSA reads. This addresses spurious end-of-stream
+      errors during audio capture.
+    - `Push iteration limit exceeded` errors, which stopped the
+      WakeWord Engine 74.5 hours after the last "Alexa" spot.
 
-### 5.0.0-avs.3 - 2017-02-01
-### Fixed
-- Handling of zero ALSA reads. This addresses spurious end-of-stream
-  errors during audio capture.
-- `Push iteration limit exceeded` errors, which stopped the
-  WakeWord Engine 74.5 hours after the last "Alexa" spot.
+#### 5.0.0-avs.2 - 2017-01-26
+* Added
+    - Change log section in README.md.
+* Fixed
+    - Reporting of ALSA errors.
+    - Handling of short ALSA reads. This addresses spurious
+      end-of-stream errors during audio capture.
+    - `Push iteration limit exceeded` errors, which occasionally stopped the
+      the WakeWord Engine after it had been running for a couple of days.
 
-### 5.0.0-avs.2 - 2017-01-26
-#### Added
-- Change log section in README.md.
-
-#### Fixed
-- Reporting of ALSA errors.
-- Handling of short ALSA reads. This addresses spurious
-  end-of-stream errors during audio capture.
-- `Push iteration limit exceeded` errors, which occasionally stopped the
-  the WakeWord Engine after it had been running for a couple of days.
-
-### 5.0.0-avs.1 - 2016-09-12
-#### Added
-- Initial release.
+#### 5.0.0-avs.1 - 2016-09-12
+* Added
+    - Initial release.
 
 ---------
 *Copyright &copy; 2016-2017 Sensory, Inc. http://sensory.com/*
