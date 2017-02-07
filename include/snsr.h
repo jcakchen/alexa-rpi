@@ -91,13 +91,13 @@ extern "C" {
 #define SNSR_USER_LIST "user-iterator"
 #include <stddef.h>
 #define SNSR_NAME          "TrulyHandsfree"
-#define SNSR_VERSION       "5.0.0-avs.3"
+#define SNSR_VERSION       "5.0.0-avs.4"
 #define SNSR_VERSION_MAJOR  5
 #define SNSR_VERSION_MINOR  0
 #define SNSR_VERSION_PATCH  0
-#define SNSR_VERSION_PRE   "avs.3"
+#define SNSR_VERSION_PRE   "avs.4"
 #define SNSR_VERSION_BUILD ""
-#define SNSR_VERSION_ID     14
+#define SNSR_VERSION_ID     15
 #define SNSR_SETTING_SZ     64
 typedef struct SnsrSession_ *SnsrSession;
 typedef enum {
@@ -166,6 +166,7 @@ typedef enum {
   SNSR_RC_NO_MODEL,
   SNSR_RC_REQUIRE_MISMATCH,
   SNSR_RC_VERSION_MISMATCH,
+  SNSR_RC_LIBRARY_HEADER,
   SNSR_RC_TIMED_OUT,
 } SnsrRC;
 typedef struct SnsrCallback_ *SnsrCallback;
@@ -289,8 +290,9 @@ SnsrRC
 snsrGetString(SnsrSession s, const char *key, const char **value);
 SnsrRC
 snsrLoad(SnsrSession s, SnsrStream inputStream);
+#define snsrNew(s) snsrNewValidateVersion((s), SNSR_VERSION)
 SnsrRC
-snsrNew(SnsrSession *s);
+snsrNewValidateVersion(SnsrSession *s, const char *version);
 SnsrRC
 snsrRequire(SnsrSession s, const char *key, const char *value);
 SnsrRC
