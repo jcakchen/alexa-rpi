@@ -75,15 +75,20 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
       trigger the unexpected behavior.
 
 1. The library license key has expired. How do I extend it?
-    * Run `./bin/license.sh`. Accept the presented EULA to pull a new license
-      key from the GitHub repository and apply it to the binaries.
-    * Copy `./lib/libsnsr.a` into your project's `ext/lib/` directory, replacing
-      the expired library.
-    * Copy `./models/*.snsr` into your project's `ext/resources/` directory,
-      replacing the expired models.
-    * Copy the model you've selected into `ext/resources/spot-alexa-rpi.snsr`,
-      e.g.: `cp ./models/spot-alexa-rpi-31000.snsr ../../ext/resources/spot-alexa-rpi.snsr`
-    * Rebuild your `wakeWordAgent` executable.
+    * In *samples/wakeWordAgent/sensory/alexa-rpi/*, issue these commands:
+
+        ```
+        git reset --hard
+        git pull
+        ./bin/license.sh; # accept license agreement
+        cp ./lib/libsnsr.a ../../ext/lib/
+        cp ./include/snsr.h ../../ext/include/
+        cp ./models/*.snsr ../../ext/resources/
+        cp ./models/spot-alexa-rpi-31000.snsr ../../ext/resources/spot-alexa-rpi.snsr
+        cd ../../src
+        make
+        ./wakeWordAgent -e sensory
+        ```
 
 1. What can I do to address audio recording problems?
     * The project uses [ALSA][] for audio recording. It will open a
@@ -109,6 +114,40 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
     * The Raspberry Pi 1 and Raspberry Pi Zero use an ARM1176JZF-S CPU,
       which supports ARMv6 instructions only. These are not supported in
       this plug-in.
+
+
+## Change Log
+
+#### 5.0.0-avs.4 - 2017-02-06
+* Changed
+    - `snsrNew()` validates *snsr.h* version.
+    - `snsrStreamFromAudioDevice()` tries to recover from
+      `snd_pcm_readi()` errors.
+    - Larger ALSA capture buffer.
+* Fixed
+    - `snsrRun()` and `snsrForEach()` return `SNSR_RC_ERROR` when
+      the `SnsrCallback` function returned `SNSR_RC_INTERRUPTED`.
+
+#### 5.0.0-avs.3 - 2017-02-01
+* Fixed
+    - Handling of zero ALSA reads. This addresses spurious end-of-stream
+      errors during audio capture.
+    - `Push iteration limit exceeded` errors, which stopped the
+      WakeWord Engine 74.5 hours after the last "Alexa" spot.
+
+#### 5.0.0-avs.2 - 2017-01-26
+* Added
+    - Change log section in README.md.
+* Fixed
+    - Reporting of ALSA errors.
+    - Handling of short ALSA reads. This addresses spurious
+      end-of-stream errors during audio capture.
+    - `Push iteration limit exceeded` errors, which occasionally stopped the
+      the WakeWord Engine after it had been running for a couple of days.
+
+#### 5.0.0-avs.1 - 2016-09-12
+* Added
+    - Initial release.
 
 ---------
 *Copyright &copy; 2016-2017 Sensory, Inc. http://sensory.com/*

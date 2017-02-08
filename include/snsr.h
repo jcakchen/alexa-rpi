@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Sensory, Inc. 2000-2016.  All Rights Reserved.
+ * Copyright (c) Sensory, Inc. 2000-2017.  All Rights Reserved.
  * http://sensory.com/
  *
  * You may not use these files except in compliance with the license.
@@ -25,6 +25,7 @@ extern "C" {
 #define SNSR_LICENSE_WARNING "license-exp-warn"
 #define SNSR_LICENSE_EXPDATE "license-exp-date"
 #define SNSR_LICENSE_EXPIRES "license-exp-message"
+#define SNSR_LIBRARY_INFO "library-info"
 #define SNSR_TASK_TYPE "task-type"
 #define SNSR_TASK_NAME "task-name"
 #define SNSR_TASK_VERSION "task-version"
@@ -49,11 +50,9 @@ extern "C" {
 #define SNSR_RES_BEGIN_SAMPLE "begin-sample"
 #define SNSR_RES_END_MS "end-ms"
 #define SNSR_RES_END_SAMPLE "end-sample"
-#define SNSR_RES_SCORE "recog-score"
 #define SNSR_RES_SV_SCORE "sv-score"
 #define SNSR_SV_THRESHOLD "sv-threshold"
 #define SNSR_SCORE_OFFSET "score-offset"
-#define SNSR_RES_TOTAL_SCORE "total-score"
 #define SNSR_RES_TEXT "text"
 #define SNSR_PHRASE_LIST "phrase-iterator"
 #define SNSR_WORD_LIST "word-iterator"
@@ -70,8 +69,13 @@ extern "C" {
 #define SNSR_RES_REASON_PASS "reason-pass"
 #define SNSR_RES_REASON_VALUE "reason-value"
 #define SNSR_RES_REASON_THRESHOLD "reason-threshold"
-#define SNSR_RES_ENROLLED_USER "enrolled-user"
 #define SNSR_RES_ENROLLMENT_COUNT "enrollment-count"
+#define SNSR_RES_ENROLLMENT_ID "enrollment-id"
+#define SNSR_ENROLLMENT_TARGET "req-enroll"
+#define SNSR_ENROLLMENT_CONTEXT "ctx-enroll"
+#define SNSR_ENROLLMENT_TASK_INDEX "enrollment-task-index"
+#define SNSR_ADD_CONTEXT "add-context"
+#define SNSR_SAVE_ENROLLMENT_AUDIO "save-enroll-audio"
 #define SNSR_MODEL_STREAM "model-stream"
 #define SNSR_AUDIO_STREAM "audio-stream"
 #define SNSR_DONE_EVENT "^done"
@@ -82,86 +86,88 @@ extern "C" {
 #define SNSR_PAUSE_EVENT "^pause"
 #define SNSR_PROG_EVENT "^progress"
 #define SNSR_RESUME_EVENT "^resume"
+#define SNSR_ENROLLMENT_LIST "enrollment-iterator"
 #define SNSR_REASON_LIST "reason-iterator"
 #define SNSR_USER_LIST "user-iterator"
 #include <stddef.h>
 #define SNSR_NAME          "TrulyHandsfree"
-#define SNSR_VERSION       "5.0.0-avs.1"
+#define SNSR_VERSION       "5.0.0-avs.4"
 #define SNSR_VERSION_MAJOR  5
 #define SNSR_VERSION_MINOR  0
 #define SNSR_VERSION_PATCH  0
-#define SNSR_VERSION_PRE   "avs.1"
+#define SNSR_VERSION_PRE   "avs.4"
 #define SNSR_VERSION_BUILD ""
-#define SNSR_VERSION_ID     5
+#define SNSR_VERSION_ID     15
 #define SNSR_SETTING_SZ     64
 typedef struct SnsrSession_ *SnsrSession;
 typedef enum {
-    SNSR_FM_CONFIG,
-    SNSR_FM_RUNTIME
+  SNSR_FM_CONFIG,
+  SNSR_FM_RUNTIME
 } SnsrDataFormat;
 typedef enum {
-    SNSR_RC_OK,
-    SNSR_RC_EOF,
-    SNSR_RC_ERROR,
-    SNSR_RC_NOT_OPEN,
-    SNSR_RC_NOT_FOUND,
-    SNSR_RC_NO_MEMORY,
-    SNSR_RC_WRONG_MODE,
-    SNSR_RC_INTERRUPTED,
-    SNSR_RC_INVALID_ARG,
-    SNSR_RC_INVALID_MODE,
-    SNSR_RC_CANNOT_REOPEN,
-    SNSR_RC_INVALID_HANDLE,
-    SNSR_RC_NOT_IMPLEMENTED,
-    SNSR_RC_DELIM_NOT_FOUND,
-    SNSR_RC_FORMAT_NOT_SUPPORTED,
-    SNSR_RC_BUFFER_OVERRUN,
-    SNSR_RC_BUFFER_UNDERRUN,
-    SNSR_RC_RESERVED_A,
-    SNSR_RC_ARG_OUT_OF_RANGE,
-    SNSR_RC_CHANNEL_EXISTS,
-    SNSR_RC_CHANNEL_NOT_BUFFERED,
-    SNSR_RC_CHANNEL_NOT_FOUND,
-    SNSR_RC_CHANNELS_NOT_COMPATIBLE,
-    SNSR_RC_CONFIGURATION_INCONSISTENT,
-    SNSR_RC_CONFIGURATION_MISSING,
-    SNSR_RC_CONNECTION_NOT_FOUND,
-    SNSR_RC_DST_CHANNEL_NOT_FOUND,
-    SNSR_RC_DST_ELEMENT_NOT_IN_BIN,
-    SNSR_RC_DST_PORT_IN_USE,
-    SNSR_RC_ELEMENT_ID_NOT_KNOWN,
-    SNSR_RC_ELEMENT_INIT_FAILED,
-    SNSR_RC_ELEMENT_INIT_INCOMPLETE,
-    SNSR_RC_ELEMENT_IS_NOT_A_BIN,
-    SNSR_RC_ELEMENT_NOT_IN_BIN,
-    SNSR_RC_ELEMENT_NOT_ROOT_BIN,
-    SNSR_RC_ELEMENT_REGISTRATION_FAILED,
-    SNSR_RC_INCORRECT_SETTING_TYPE,
-    SNSR_RC_LICENSE_NOT_VALID,
-    SNSR_RC_ITERATION_LIMIT,
-    SNSR_RC_NAME_NOT_UNIQUE,
-    SNSR_RC_NOT_ENOUGH_SPACE,
-    SNSR_RC_NOT_INITIALIZED,
-    SNSR_RC_PUSH_FAILED,
-    SNSR_RC_REPEAT,
-    SNSR_RC_SETTING_FAILED,
-    SNSR_RC_SETTING_IS_READ_ONLY,
-    SNSR_RC_SETTING_NOT_AVAILABLE,
-    SNSR_RC_SETTING_NOT_FOUND,
-    SNSR_RC_SKIP,
-    SNSR_RC_SRC_CHANNEL_NOT_FOUND,
-    SNSR_RC_SRC_ELEMENT_NOT_IN_BIN,
-    SNSR_RC_SRC_PORT_IN_USE,
-    SNSR_RC_STOP,
-    SNSR_RC_STREAM,
-    SNSR_RC_STREAM_END,
-    SNSR_RC_UNKNOWN_OBJECT_TYPE,
-    SNSR_RC_VALUE_NOT_SET,
-    SNSR_RC_RESERVED_B,
-    SNSR_RC_NO_MODEL,
-    SNSR_RC_REQUIRE_MISMATCH,
-    SNSR_RC_VERSION_MISMATCH,
-    SNSR_RC_TIMED_OUT,
+  SNSR_RC_OK,
+  SNSR_RC_EOF,
+  SNSR_RC_ERROR,
+  SNSR_RC_NOT_OPEN,
+  SNSR_RC_NOT_FOUND,
+  SNSR_RC_NO_MEMORY,
+  SNSR_RC_WRONG_MODE,
+  SNSR_RC_INTERRUPTED,
+  SNSR_RC_INVALID_ARG,
+  SNSR_RC_INVALID_MODE,
+  SNSR_RC_CANNOT_REOPEN,
+  SNSR_RC_INVALID_HANDLE,
+  SNSR_RC_NOT_IMPLEMENTED,
+  SNSR_RC_DELIM_NOT_FOUND,
+  SNSR_RC_FORMAT_NOT_SUPPORTED,
+  SNSR_RC_BUFFER_OVERRUN,
+  SNSR_RC_BUFFER_UNDERRUN,
+  SNSR_RC_RESERVED_A,
+  SNSR_RC_ARG_OUT_OF_RANGE,
+  SNSR_RC_CHANNEL_EXISTS,
+  SNSR_RC_CHANNEL_NOT_BUFFERED,
+  SNSR_RC_CHANNEL_NOT_FOUND,
+  SNSR_RC_CHANNELS_NOT_COMPATIBLE,
+  SNSR_RC_CONFIGURATION_INCONSISTENT,
+  SNSR_RC_CONFIGURATION_MISSING,
+  SNSR_RC_CONNECTION_NOT_FOUND,
+  SNSR_RC_DST_CHANNEL_NOT_FOUND,
+  SNSR_RC_DST_ELEMENT_NOT_IN_BIN,
+  SNSR_RC_DST_PORT_IN_USE,
+  SNSR_RC_ELEMENT_ID_NOT_KNOWN,
+  SNSR_RC_ELEMENT_INIT_FAILED,
+  SNSR_RC_ELEMENT_INIT_INCOMPLETE,
+  SNSR_RC_ELEMENT_IS_NOT_A_BIN,
+  SNSR_RC_ELEMENT_NOT_IN_BIN,
+  SNSR_RC_ELEMENT_NOT_ROOT_BIN,
+  SNSR_RC_ELEMENT_REGISTRATION_FAILED,
+  SNSR_RC_INCORRECT_SETTING_TYPE,
+  SNSR_RC_LICENSE_NOT_VALID,
+  SNSR_RC_ITERATION_LIMIT,
+  SNSR_RC_NAME_NOT_UNIQUE,
+  SNSR_RC_NOT_ENOUGH_SPACE,
+  SNSR_RC_NOT_INITIALIZED,
+  SNSR_RC_PUSH_FAILED,
+  SNSR_RC_REPEAT,
+  SNSR_RC_SETTING_FAILED,
+  SNSR_RC_SETTING_IS_READ_ONLY,
+  SNSR_RC_SETTING_NOT_AVAILABLE,
+  SNSR_RC_SETTING_NOT_FOUND,
+  SNSR_RC_SKIP,
+  SNSR_RC_SRC_CHANNEL_NOT_FOUND,
+  SNSR_RC_SRC_ELEMENT_NOT_IN_BIN,
+  SNSR_RC_SRC_PORT_IN_USE,
+  SNSR_RC_STOP,
+  SNSR_RC_STREAM,
+  SNSR_RC_STREAM_END,
+  SNSR_RC_UNKNOWN_OBJECT_TYPE,
+  SNSR_RC_VALUE_NOT_SET,
+  SNSR_RC_RESERVED_B,
+  SNSR_RC_NO_MODEL,
+  SNSR_RC_REQUIRE_MISMATCH,
+  SNSR_RC_VERSION_MISMATCH,
+  SNSR_RC_LIBRARY_HEADER,
+  SNSR_RC_TIMED_OUT,
 } SnsrRC;
 typedef struct SnsrCallback_ *SnsrCallback;
 typedef SnsrRC (*SnsrHandler)(SnsrSession s, const char *key, void *data);
@@ -170,12 +176,12 @@ SnsrCallback
 snsrCallback(SnsrHandler h, SnsrDataRelease r, void *data);
 typedef struct SnsrStream_  *SnsrStream;
 typedef enum {
-    SNSR_ST_META_BYTES_READ,
-    SNSR_ST_META_BYTES_WRITTEN,
-    SNSR_ST_META_IS_OPEN,
-    SNSR_ST_META_IS_READABLE,
-    SNSR_ST_META_IS_WRITABLE,
-    SNSR_ST_META_OPEN_COUNT,
+  SNSR_ST_META_BYTES_READ,
+  SNSR_ST_META_BYTES_WRITTEN,
+  SNSR_ST_META_IS_OPEN,
+  SNSR_ST_META_IS_READABLE,
+  SNSR_ST_META_IS_WRITABLE,
+  SNSR_ST_META_OPEN_COUNT,
 } SnsrStreamMeta;
 int
 snsrStreamAtEnd(SnsrStream b);
@@ -203,12 +209,22 @@ size_t
 snsrStreamWrite(SnsrStream a, const void *buffer, size_t size, size_t nitems);
 typedef SnsrRC (*SnsrStreamEvent)(SnsrStream s, void *data);
 typedef enum {
-    SNSR_ST_AF_DEFAULT,
-    SNSR_ST_AF_LPCM_S16_16K,
+  SNSR_ST_AF_DEFAULT,
+  SNSR_ST_AF_DEFAULT_LOW_LATENCY,
+  SNSR_ST_AF_LPCM_S16_16K,
+  SNSR_ST_AF_LPCM_S16_16K_LOW_LATENCY,
+  SNSR_ST_AF_DEVICE,
+  SNSR_ST_AF_DEVICE_LOW_LATENCY,
+  SNSR_ST_AF_DEVICE_RATE_MODE,
+  SNSR_ST_AF_DEVICE_RATE_MODE_LOW_LATENCY,
+  SNSR_ST_AF_DEVID,
+  SNSR_ST_AF_DEVID_LOW_LATENCY,
+  SNSR_ST_AF_DEVID_RATE_MODE,
+  SNSR_ST_AF_DEVID_RATE_MODE_LOW_LATENCY,
 } SnsrStreamAudioFormat;
 typedef enum {
-    SNSR_ST_MODE_READ,
-    SNSR_ST_MODE_WRITE,
+  SNSR_ST_MODE_READ,
+  SNSR_ST_MODE_WRITE,
 } SnsrStreamMode;
 #if defined(__ANDROID__) || defined(DOXYGEN)
 #include <android/asset_manager_jni.h>
@@ -237,12 +253,12 @@ snsrStreamFromString(const char *string);
 SnsrStream
 snsrStreamRaise(SnsrStreamEvent e, SnsrDataRelease r, void *data);
 typedef struct {
-    const char *name;
-    SnsrRC (*open)(SnsrStream b);
-    SnsrRC (*close)(SnsrStream b);
-    void (*release)(SnsrStream b);
-    size_t (*read)(SnsrStream b, void *data, size_t sizeInBytes);
-    size_t (*write)(SnsrStream b, const void *data, size_t sizeInBytes);
+  const char *name;
+  SnsrRC (*open)(SnsrStream b);
+  SnsrRC (*close)(SnsrStream b);
+  void (*release)(SnsrStream b);
+  size_t (*read)(SnsrStream b, void *data, size_t sizeInBytes);
+  size_t (*write)(SnsrStream b, const void *data, size_t sizeInBytes);
 } SnsrStream_Vmt;
 SnsrStream
 snsrStream_alloc(SnsrStream_Vmt *def, void *data, int readable, int writable);
@@ -256,6 +272,8 @@ void
 snsrStream_setDetail(SnsrStream b, const char *format, ...);
 void
 snsrClearRC(SnsrSession s);
+void
+snsrDescribeError(SnsrSession s, const char *format, ...);
 SnsrRC
 snsrDup(SnsrSession s, SnsrSession *dst);
 const char *
@@ -272,8 +290,9 @@ SnsrRC
 snsrGetString(SnsrSession s, const char *key, const char **value);
 SnsrRC
 snsrLoad(SnsrSession s, SnsrStream inputStream);
+#define snsrNew(s) snsrNewValidateVersion((s), SNSR_VERSION)
 SnsrRC
-snsrNew(SnsrSession *s);
+snsrNewValidateVersion(SnsrSession *s, const char *version);
 SnsrRC
 snsrRequire(SnsrSession s, const char *key, const char *value);
 SnsrRC
