@@ -76,7 +76,8 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
 
 1. The library license key has expired. How do I extend it?
     * In *samples/wakeWordAgent/sensory/alexa-rpi/*, issue these commands:
-        ```bash
+
+        ```
         git reset --hard
         git pull
         ./bin/license.sh; # accept license agreement
