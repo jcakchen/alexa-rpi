@@ -75,15 +75,19 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
       trigger the unexpected behavior.
 
 1. The library license key has expired. How do I extend it?
-    * Run `./bin/license.sh`. Accept the presented EULA to pull a new license
-      key from the GitHub repository and apply it to the binaries.
-    * Copy `./lib/libsnsr.a` into your project's `ext/lib/` directory, replacing
-      the expired library.
-    * Copy `./models/*.snsr` into your project's `ext/resources/` directory,
-      replacing the expired models.
-    * Copy the model you've selected into `ext/resources/spot-alexa-rpi.snsr`,
-      e.g.: `cp ./models/spot-alexa-rpi-31000.snsr ../../ext/resources/spot-alexa-rpi.snsr`
-    * Rebuild your `wakeWordAgent` executable.
+    * In *samples/wakeWordAgent/sensory/alexa-rpi/*, issue these commands:
+        ```bash
+        git reset --hard
+        git pull
+        ./bin/license.sh; # accept license agreement
+        cp ./lib/libsnsr.a ../../ext/lib/
+        cp ./include/snsr.h ../../ext/include/
+        cp ./models/*.snsr ../../ext/resources/
+        cp ./models/spot-alexa-rpi-31000.snsr ../../ext/resources/spot-alexa-rpi.snsr
+        cd ../../src
+        make
+        ./wakeWordAgent -e sensory
+        ```
 
 1. What can I do to address audio recording problems?
     * The project uses [ALSA][] for audio recording. It will open a
