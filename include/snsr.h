@@ -26,6 +26,7 @@ extern "C" {
 #define SNSR_LICENSE_EXPDATE "license-exp-date"
 #define SNSR_LICENSE_EXPIRES "license-exp-message"
 #define SNSR_LIBRARY_INFO "library-info"
+#define SNSR_AUTO_FLUSH "auto-flush"
 #define SNSR_TASK_TYPE "task-type"
 #define SNSR_TASK_NAME "task-name"
 #define SNSR_TASK_VERSION "task-version"
@@ -36,6 +37,9 @@ extern "C" {
 #define SNSR_EMBEDDED_HEADER_STREAM "dsp-header-stream"
 #define SNSR_EMBEDDED_SEARCH_STREAM "dsp-search-stream"
 #define SNSR_EMBEDDED_ACMODEL_STREAM "dsp-acmodel-stream"
+#define SNSR_OPERATING_POINT "operating-point"
+#define SNSR_OPERATING_POINT_LIST "operating-point-iterator"
+#define SNSR_RES_AVAILABLE_POINT "available-point"
 #define SNSR_SAMPLE_RATE "samples-per-second"
 #define SNSR_AUDIO_STREAM_SIZE "audio-stream-size"
 #define SNSR_AUDIO_STREAM_FIRST "audio-stream-first"
@@ -52,6 +56,9 @@ extern "C" {
 #define SNSR_RES_END_SAMPLE "end-sample"
 #define SNSR_RES_SV_SCORE "sv-score"
 #define SNSR_SV_THRESHOLD "sv-threshold"
+#define SNSR_RES_SIGNAL_ENERGY "signal-energy"
+#define SNSR_RES_NOISE_ENERGY "noise-energy"
+#define SNSR_RES_SNR "snr"
 #define SNSR_SCORE_OFFSET "score-offset"
 #define SNSR_RES_TEXT "text"
 #define SNSR_PHRASE_LIST "phrase-iterator"
@@ -63,6 +70,7 @@ extern "C" {
 #define SNSR_INTERACTIVE_MODE "interactive"
 #define SNSR_USER "user"
 #define SNSR_DELETE_USER "delete-user"
+#define SNSR_RE_ADAPT "re-adapt"
 #define SNSR_RES_PERCENT_DONE "percent-done"
 #define SNSR_RES_REASON "reason"
 #define SNSR_RES_GUIDANCE "reason-guidance"
@@ -80,6 +88,7 @@ extern "C" {
 #define SNSR_AUDIO_STREAM "audio-stream"
 #define SNSR_DONE_EVENT "^done"
 #define SNSR_ENROLLED_EVENT "^enrolled"
+#define SNSR_ADAPTED_EVENT "^adapted"
 #define SNSR_FAIL_EVENT "^fail"
 #define SNSR_PASS_EVENT "^pass"
 #define SNSR_NEXT_EVENT "^next"
@@ -91,13 +100,14 @@ extern "C" {
 #define SNSR_USER_LIST "user-iterator"
 #include <stddef.h>
 #define SNSR_NAME          "TrulyHandsfree"
-#define SNSR_VERSION       "5.0.0-avs.4"
+#define SNSR_VERSION       "5.0.0-beta.10.2"
 #define SNSR_VERSION_MAJOR  5
 #define SNSR_VERSION_MINOR  0
 #define SNSR_VERSION_PATCH  0
-#define SNSR_VERSION_PRE   "avs.4"
+#define SNSR_VERSION_PRE   "beta.10.2"
 #define SNSR_VERSION_BUILD ""
-#define SNSR_VERSION_ID     15
+#define SNSR_VERSION_ID     22
+#define SNSR_TECH_LEVEL    "5.0"
 #define SNSR_SETTING_SZ     64
 typedef struct SnsrSession_ *SnsrSession;
 typedef enum {
@@ -144,6 +154,7 @@ typedef enum {
   SNSR_RC_INCORRECT_SETTING_TYPE,
   SNSR_RC_LICENSE_NOT_VALID,
   SNSR_RC_ITERATION_LIMIT,
+  SNSR_RC_ELEMENT_API_VIOLATION,
   SNSR_RC_NAME_NOT_UNIQUE,
   SNSR_RC_NOT_ENOUGH_SPACE,
   SNSR_RC_NOT_INITIALIZED,
@@ -167,6 +178,7 @@ typedef enum {
   SNSR_RC_REQUIRE_MISMATCH,
   SNSR_RC_VERSION_MISMATCH,
   SNSR_RC_LIBRARY_HEADER,
+  SNSR_RC_LIBRARY_TOO_OLD,
   SNSR_RC_TIMED_OUT,
 } SnsrRC;
 typedef struct SnsrCallback_ *SnsrCallback;

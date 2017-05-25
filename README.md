@@ -31,42 +31,33 @@ as enrolled speaker-specific triggers and speaker verification.
 This project is a plug-in for the [Alexa AVS sample app][alexa] project.
 Please follow the build and configuration instructions for that project.
 
-## Performance
+## Model selection
 
-The *models/* subdirectory contains recognition models of different sizes.
-The larger models provide better performance but require more CPU resources.
-The table below provides details.
+The *models/* subdirectory contains recognition models with a selection of
+operating points.
 
-Model | Size MiB | FR % | FA / day | MIPS |Pi 2 CPU % |Pi 3 CPU %
-------|:--------:|:----:|:--------:|-----:|--------:|---------:
-spot-alexa-rpi-20500.snsr|0.3|10.5 &plusmn; 2.1|6.6 &plusmn; 1| 34 | 5.1| 2.8
-spot-alexa-rpi-21000.snsr|1.1|10.2 &plusmn; 2.1|4.5 &plusmn; 1| 90 |17.7| 8.1
-spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
+
+Model | Size MiB |Pi 2 CPU % |Pi 3 CPU %|Description
+------|:--------:|----------:|---------:|-----------
+spot-alexa-rpi-21000.snsr|1.0|18.0|8.2|low false fire
+spot-alexa-rpi-31000.snsr|1.0|18.0|8.2|higher acceptance
+
+Adding noise tech may improve poor SNR from longer distances, or improve
+the acceptance rate of the lower false fire model.
+
+Note that *spot-alexa-rpi-20500* is included for compatibility with the
+parent project's *automated_install.sh* script. It is the same file as
+*spot-alexa-rpi-21000.snsr*.
 
 **Key:**
 
   * Size: The file size of the keyword spotter model in Mebibytes.
     This is also an estimate of the runtime RAM requirement.
-  * FR: False Reject percentage. This is the fraction of times the correct
-    wakeword is not recognized.
-  * FA: False Accept frequency. The number of times per day the system
-    mistakenly reports a spot of the wakeword.
   * Pi 2 CPU %: [Raspberry Pi 2 model B][2B] CPU resource usage
     expressed as a percentage of real-time.
     50% is half of one CPU core: Such a recognizer
     processes audio at twice the rate it arrives from the microphone.
   * Pi 3 CPU %: [Raspberry Pi 3 model B][3B] CPU resource usage.
-
-**Test methodology:**
-
-  * Measured on data independent from those used for development.
-  * More than 1400 utterances were evaluated, each of these in 24 different
-    noise conditions (six different noise types, four [SNR][] levels).
-  * Includes over-the-air tests of physical devices in an anechoic chamber.
-  * Results reported in the table above were measured at 12 [dBA] SNR.
-  * In typical use the SNR is around 15 dBA. A better signal-to-noise ratio
-    results in better performance; the reported results are therefore
-   conservative.
 
 ## Frequently Asked Questions
 
@@ -117,6 +108,12 @@ spot-alexa-rpi-31000.snsr|2.0|10.6 &plusmn; 2.1|3.7 &plusmn; 1|168 |33.2|14.0
 
 
 ## Change Log
+
+#### 5.0.0-beta.10.2 - 2017-05-25
+* Added
+    - Support for application-driven audio pipeline.
+* Changed
+    - New models with improved wakeword performance.
 
 #### 5.0.0-avs.4 - 2017-02-06
 * Changed
