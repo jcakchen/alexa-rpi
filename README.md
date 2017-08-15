@@ -39,15 +39,14 @@ operating points.
 
 Model | Size MiB |Pi 2 CPU % |Pi 3 CPU %|Description
 ------|:--------:|----------:|---------:|-----------
-spot-alexa-rpi-21000.snsr|1.0|18.0|8.2|low false fire
-spot-alexa-rpi-31000.snsr|1.0|18.0|8.2|higher acceptance
+spot-alexa-rpi-31000.snsr|1.0|18.0|8.2|recommended for use without noise tech
 
 Adding noise tech may improve poor SNR from longer distances, or improve
 the acceptance rate of the lower false fire model.
 
-Note that *spot-alexa-rpi-20500* is included for compatibility with the
-parent project's *automated_install.sh* script. It is the same file as
-*spot-alexa-rpi-21000.snsr*.
+Note that *spot-alexa-rpi-20500.snsr* and *spot-alexa-rpi-21000.snsr* are
+included for compatibility with the parent project's *automated_install.sh*
+script. These files are the same as *spot-alexa-rpi-31000.snsr*.
 
 **Key:**
 
@@ -108,6 +107,10 @@ parent project's *automated_install.sh* script. It is the same file as
 
 
 ## Change Log
+
+#### 5.0.0-beta.10.2 - 2017-08-15
+* Changed
+    - New model with improved wakeword performance.
 
 #### 5.0.0-beta.10.2 - 2017-05-25
 * Added
